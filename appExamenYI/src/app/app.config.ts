@@ -13,7 +13,15 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: {
+          ...Aura,
+          // Indicamos que dentro del modo oscuro (dark),
+          // queremos cambiar el color primario.
+          dark: {
+            ...Aura,
+            primary: 'slate'
+          }
+        }
       }
     })
   ]
