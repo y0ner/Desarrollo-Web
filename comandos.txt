@@ -2,4 +2,7 @@ instalacion del talwind css
 
 http://www.tecnogua.com/academic/site/frontend/angular20/instalacion/
 
+ng generate module nombre-modulo
+
+ng generate service nombre-servicio
 
