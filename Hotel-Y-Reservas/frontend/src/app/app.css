@@ -1,44 +1,27 @@
 main {
     display: grid;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr  1fr;
+    grid-template-columns: 250px 1fr; /* Ancho de la barra lateral y contenido principal */
     grid-template-areas:
-    "header header  header  header  header"
-    "aside  section section section section"
-    "footer footer  footer  footer  footer";
-    row-gap: 0;
-    column-gap: 0;
-    grid-template-rows: 20% 70% 10%;
-    height: 98vh;
+    "header header"
+    "aside  section"
+    "footer footer";
+    grid-template-rows: auto 1fr auto; /* Alto del header, contenido principal flexible, alto del footer */
+    height: 100vh;
+    background-color: #f4f7f9; /* Un fondo claro para la página */
 }
 
 header {
     grid-area: header;
-    border: 1px solid royalblue;
 }
 
 aside {
     grid-area: aside;
-    border: 1px solid royalblue;
 }
 
 section {
     grid-area: section;
-    border: 1px solid royalblue;
-}
-
-.recuadros {
-    display: flex;
-    flex-flow: row wrap;
-    row-gap: 20px;
-    margin: 2px 20px 2px 5px;
-}
-
-.elemento {
-    width: 25%;
 }
 
 footer {
     grid-area: footer;
-    border: 1px solid royalblue;
 }
