@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { ToolbarModule } from 'primeng/toolbar';
 import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ToolbarModule, AvatarModule],
+  imports: [AvatarModule, ButtonModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class Header {
 
 }
+
