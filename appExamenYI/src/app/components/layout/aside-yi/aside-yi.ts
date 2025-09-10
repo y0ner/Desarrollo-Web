@@ -3,11 +3,11 @@ import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
 
 @Component({
-  selector: 'app-aside',
+  selector: 'app-aside-yi', // <--- CORRECTED SELECTOR
   standalone: true,
-  imports: [PanelMenuModule], // Asegúrate de importar PanelMenuModule
+  imports: [PanelMenuModule],
   templateUrl: './aside-yi.html',
-  styleUrl: './aside-yi.css'
+  styleUrls: ['./aside-yi.css']
 })
 export class AsideYi implements OnInit {
   items: MenuItem[] | undefined;
