@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "practica": {
+    "Hotel": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "practica:build:production"
+              "buildTarget": "Hotel:build:production"
             },
             "development": {
-              "buildTarget": "practica:build:development"
+              "buildTarget": "Hotel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,8 +88,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }
