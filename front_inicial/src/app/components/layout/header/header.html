@@ -1,30 +1,36 @@
 <div class="flex items-center w-full h-full">
-  <!-- Botón menú izquierdo -->
-  <div class="flex items-center justify-center h-24">
-    <button type="button" class="mr-2 bg-blue-200 text-orange-500 rounded shadow hover:bg-blue-300 w-10 h-10" (click)="toggleAside.emit()">
-      <i class="pi pi-bars text-xl"></i>
-    </button>
+
+  <div class="flex items-center">
+    <img class="h-10" src="/logo.png" alt="Logo Hotel" />
   </div>
 
-  <!-- Título centrado -->
-  <div class="flex-1 flex items-center justify-center">
-    <h2 class="text-xl font-bold">ACADEMIC SYSTEM</h2>
-  </div>
+  <!-- Espacio fijo -->
+  <div class="w-52"></div>
 
-  <!-- Botones derechos alineados totalmente a la derecha -->
-  <div class="flex items-center justify-end space-x-2">
-    <button type="button" class="bg-blue-300 text-orange-500 rounded shadow hover:bg-blue-400 flex items-center justify-center w-10 h-10 border-orange-2">
-      <p-overlaybadge value="2">
-        <i class="pi pi-bell" style="font-size: 2rem"></i>
-    </p-overlaybadge>
+  <div class="flex items-center gap-4">
+    <button pButton type="button" icon="pi pi-bars" (click)="toggleAside.emit()"
+      class="p-button-text p-button-rounded text-text-color-secondary hover:bg-gray-100"></button>
+
+    <div class="relative hidden md:flex items-center">
+      <input pInputText placeholder="Buscar..." class="pr-10 font-normal w-full" />
+      <i class="pi pi-search absolute right-3 text-text-color-secondary"></i>
+    </div>
+
+    <div class="w-px h-6 bg-surface-border mx-2"></div>
+
+    <button pButton type="button" icon="pi pi-bell"
+      class="p-button-text p-button-rounded text-text-color-secondary hover:bg-gray-100 relative">
+      <p-badge value="2" severity="danger"></p-badge>
     </button>
 
-    
-    <!-- Botón imagen usuario que despliega el menú -->
-    <button type="button"
-      class="bg-blue-300 text-orange-500 rounded shadow hover:bg-blue-400 w-10 h-10 flex items-center justify-center border-orange-2"
+    <button pButton type="button" icon="pi pi-cog"
+      class="p-button-text p-button-rounded text-text-color-secondary hover:bg-gray-100"
+      [routerLink]="['/settings']"></button>
+
+    <button pButton type="button"
+      class="p-button-text p-button-rounded text-text-color-secondary hover:bg-gray-100 flex items-center justify-center w-10 h-10 border-2 border-transparent hover:border-primary transition-colors"
       (click)="menu.toggle($event)">
-      <i class="pi pi-users"></i>
+      <i class="pi pi-user text-2xl"></i>
     </button>
     <p-tieredmenu #menu [model]="items" [popup]="true" />
   </div>

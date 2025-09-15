@@ -47,7 +47,7 @@ export class Aside implements OnInit {
       },
       {
         label: 'Servicios',
-        icon: 'pi pi-fw pi-concierge-bell',
+        icon: 'pi pi-fw pi-briefcase',
         routerLink: '/services',
       },
       {

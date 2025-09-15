@@ -6,11 +6,13 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { BadgeModule } from 'primeng/badge';
 import { InputTextModule } from 'primeng/inputtext';
+import { RouterModule } from '@angular/router'; // Importa RouterModule
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, TieredMenuModule, OverlayBadgeModule, BadgeModule, InputTextModule],
+  imports: [CommonModule, RouterModule, ButtonModule, TieredMenuModule, BadgeModule, InputTextModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
