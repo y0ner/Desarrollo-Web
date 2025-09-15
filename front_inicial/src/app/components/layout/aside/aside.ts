@@ -4,11 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-aside',
   standalone: true,
-  imports: [PanelMenuModule],
+  imports: [PanelMenuModule,CommonModule, RouterModule],
   templateUrl: './aside.html',
   styleUrl: './aside.css',
   encapsulation: ViewEncapsulation.None

@@ -34,4 +34,10 @@ export class BookingService {
     );
     this.bookingsService.next(bookings);
   }
+   markAsPaid(bookingId: number) {
+    const bookings = this.bookingsService.value.map(b => 
+      b.id === bookingId ? { ...b, status: 'Pagada' as const } : b
+    );
+    this.bookingsService.next(bookings);
+  }
 }

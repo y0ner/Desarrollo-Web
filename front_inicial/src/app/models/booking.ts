@@ -7,5 +7,5 @@ export interface BookingI {
   checkInDate: Date;
   checkOutDate: Date;
   totalPrice: number;
-  status: 'Confirmada' | 'Pendiente' | 'Cancelada';
+  status: 'Confirmada' | 'Pendiente' | 'Cancelada' | 'Pagada';
 }

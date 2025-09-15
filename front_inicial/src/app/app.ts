@@ -5,11 +5,12 @@ import { Footer } from './components/layout/footer/footer';
 import { Aside } from './components/layout/aside/aside';
 import { CommonModule } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, Header, Aside, ConfirmDialogModule],
+  imports: [CommonModule, RouterOutlet, Header, Aside, ConfirmDialogModule, ToastModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

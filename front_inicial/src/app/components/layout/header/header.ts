@@ -4,11 +4,13 @@ import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { BadgeModule } from 'primeng/badge';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, TieredMenuModule, OverlayBadgeModule],
+  imports: [ButtonModule, TieredMenuModule, OverlayBadgeModule, BadgeModule, InputTextModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })

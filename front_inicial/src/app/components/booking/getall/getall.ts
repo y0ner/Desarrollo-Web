@@ -11,6 +11,7 @@ import { GuestService } from '../../../services/guest.service';
 import { RoomService } from '../../../services/room.service';
 import { ConfirmationService } from 'primeng/api';
 
+
 @Component({
   selector: 'app-getall-bookings',
   standalone: true,
