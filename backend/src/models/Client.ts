@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../database/db";
+import { Sale } from "./Sale";
 
 export interface ClientI {
   id?: number;
@@ -60,3 +61,13 @@ Client.init(
     timestamps: false,
   }
 );
+
+Client.hasMany(Sale, {
+  foreignKey: "client_id",
+  sourceKey: "id",
+});
+
+Sale.belongsTo(Client, {
+  foreignKey: "client_id",
+  targetKey: "id",
+});
