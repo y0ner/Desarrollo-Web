@@ -23,6 +23,7 @@
     "@types/sequelize": "^4.28.20",
     "@types/speakeasy": "^2.0.10",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
