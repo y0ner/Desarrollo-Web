@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../database/connection";
+import { sequelize } from "../database/db";
+import bcrypt from 'bcryptjs';
 import { Sale } from "./Sale";
 
 export interface ClientI {
@@ -37,13 +38,15 @@ Client.init(
       allowNull: true,
       validate: {
         notEmpty: { msg: "Phone cannot be empty" },
-        len: { args: [10, 15], msg: "Phone must be between 10 and 15 characters" },
       },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: true,
       unique: true,
+      validate: {
+        isEmail: { msg: "Email must be a valid email address" }, // Validate email format
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -59,6 +62,20 @@ Client.init(
     modelName: "Client",
     tableName: "clients",
     timestamps: false,
+        hooks: {
+          beforeCreate: async (client: Client) => {
+            if (client.password) {
+              const salt = await bcrypt.genSalt(10);
+              client.password = await bcrypt.hash(client.password, salt);
+            }
+          },
+          beforeUpdate: async (client: Client) => {
+            if (client.password) {
+              const salt = await bcrypt.genSalt(10);
+              client.password = await bcrypt.hash(client.password, salt);
+            }
+          }
+        }
   }
 );
 
@@ -66,7 +83,6 @@ Client.hasMany(Sale, {
   foreignKey: "client_id",
   sourceKey: "id",
 });
-
 Sale.belongsTo(Client, {
   foreignKey: "client_id",
   targetKey: "id",

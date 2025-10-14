@@ -1,0 +1,40 @@
+### productSale.http
+
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todas las ventas de productos
+GET {{baseUrl}}/product-sales
+
+### Obtener venta de producto por ID
+GET {{baseUrl}}/product-sales/1
+
+### Crear una nueva venta de producto
+POST {{baseUrl}}/product-sales
+Content-Type: application/json
+
+{
+  "total": 1500000,
+  "sale_id": 1,
+  "product_id": 1
+}
+
+### Actualizar una venta de producto
+PATCH {{baseUrl}}/product-sales/1
+Content-Type: application/json
+
+{
+  "total": 1600000,
+  "sale_id": 1,
+  "product_id": 1
+}
+
+### Eliminar una venta de producto físicamente
+DELETE {{baseUrl}}/product-sales/1
+
+### Eliminar una venta de producto lógicamente
+DELETE {{baseUrl}}/product-sales/1/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================

@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import morgan from "morgan";
-import sequelize from "../database/connection";
+import { sequelize, testConnection, getDatabaseInfo } from "../database/db";
 import { Routes } from "../routes/index";
-var cors = require("cors"); // install en node y types
 
-// Load environment variables from the .env file
+var cors = require("cors");
+
 dotenv.config();
 
 export class App {
@@ -14,19 +14,16 @@ export class App {
 
   constructor(private port?: number | string) {
     this.app = express();
-
     this.settings();
     this.middlewares();
     this.routes();
-    this.dbConnection(); // Call the database connection method
+    this.dbConnection();
   }
 
-  // Application settings
   private settings(): void {
     this.app.set('port', this.port || process.env.PORT || 4000);
   }
 
-  // Middleware configuration
   private middlewares(): void {
     this.app.use(morgan('dev'));
     this.app.use(cors());
@@ -38,35 +35,42 @@ export class App {
   private routes(): void {
     this.routePrv.clientRoutes.routes(this.app);
     this.routePrv.saleRoutes.routes(this.app);
-    // this.routePrv.productRoutes.routes(this.app); // Add Product routes
-    // this.routePrv.productTypeRoutes.routes(this.app); // Add ProductType routes
-    // this.routePrv.productSaleRoutes.routes(this.app); // Add ProductSale routes
-
-    // this.routePrv.userRoutes.routes(this.app);
-    // this.routePrv.roleRoutes.routes(this.app);
-    // this.routePrv.roleUserRoutes.routes(this.app);
-    // this.routePrv.authRoutes.routes(this.app);
-    // this.routePrv.refreshTokenRoutes.routes(this.app);
-    // this.routePrv.resourceRoutes.routes(this.app); // Add Resource routes
-    // this.routePrv.resourceRoleRoutes.routes(this.app); // Add ResourceRole routes
-
-    // CUANDO SE CREE LOS DEMAS MODULOS, PRDUCT, USER, ROLE, AUTH, REFRESHTOKEN, RESOURCE, ROLE-RESOURCE, ROLE-USER
-    // SE DEBE DESCOMENTAR ESTO!!!
+    this.routePrv.productRoutes.routes(this.app);
+    this.routePrv.productTypeRoutes.routes(this.app);
+    this.routePrv.productSaleRoutes.routes(this.app);
+    this.routePrv.userRoutes.routes(this.app);
+    this.routePrv.roleRoutes.routes(this.app);
+    this.routePrv.roleUserRoutes.routes(this.app);
+    this.routePrv.refreshTokenRoutes.routes(this.app);
+    this.routePrv.resourceRoutes.routes(this.app);
+    this.routePrv.resourceRoleRoutes.routes(this.app);
   }
 
-  // Method to connect and synchronize the database
   private async dbConnection(): Promise<void> {
     try {
-      await sequelize.sync({ force: false }); // Synchronize the database
-      console.log("Database connected successfully");
+      // Mostrar información de la base de datos seleccionada
+      const dbInfo = getDatabaseInfo();
+      console.log(`🔗 Intentando conectar a: ${dbInfo.engine.toUpperCase()}`);
+
+      // Probar la conexión
+      const isConnected = await testConnection();
+
+      if (!isConnected) {
+        throw new Error(`No se pudo conectar a la base de datos ${dbInfo.engine.toUpperCase()}`);
+      }
+
+      // Sincronizar la base de datos
+      await sequelize.sync({ force: false });
+      console.log(`📦 Base de datos sincronizada exitosamente`);
+
     } catch (error) {
-      console.error("Unable to connect to the database:", error);
+      console.error("❌ Error al conectar con la base de datos:", error);
+      process.exit(1); // Terminar la aplicación si no se puede conectar
     }
   }
 
-  // Start the server
   async listen() {
     await this.app.listen(this.app.get('port'));
-    console.log('Server on port', this.app.get('port'));
+    console.log(`🚀 Servidor ejecutándose en puerto ${this.app.get('port')}`);
   }
 }

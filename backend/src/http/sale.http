@@ -1,0 +1,48 @@
+### sale.http
+
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todas las ventas
+GET {{baseUrl}}/ventas
+
+### Obtener venta por ID
+GET {{baseUrl}}/ventas/1
+
+### Crear una nueva venta
+POST {{baseUrl}}/ventas
+Content-Type: application/json
+
+{
+  "sale_date": "2024-01-15T10:30:00.000Z",
+  "subtotal": 100000,
+  "tax": 19000,
+  "discounts": 5000,
+  "total": 114000,
+  "status": "ACTIVE",
+  "client_id": 1
+}
+
+### Actualizar una venta
+PATCH {{baseUrl}}/ventas/1
+Content-Type: application/json
+
+{
+  "sale_date": "2024-01-15T10:30:00.000Z",
+  "subtotal": 120000,
+  "tax": 22800,
+  "discounts": 10000,
+  "total": 132800,
+  "status": "ACTIVE",
+  "client_id": 1
+}
+
+### Eliminar una venta físicamente
+DELETE {{baseUrl}}/ventas/1
+
+### Eliminar una venta lógicamente
+DELETE {{baseUrl}}/ventas/1/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================

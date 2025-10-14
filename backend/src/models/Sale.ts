@@ -1,33 +1,32 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../database/connection";
+import { sequelize } from "../database/db";
+import { ProductSale } from "./ProductSale";
 
 export interface SaleI {
   id?: number;
-  saleDate: Date;
+  sale_date: Date;
   subtotal: number;
   tax: number;
   discounts: number;
   total: number;
   status: "ACTIVE" | "INACTIVE";
   client_id: number;
-  sale_id: number;
 }
 
 export class Sale extends Model {
   public id!: number;
-  public saleDate!: Date;
+  public sale_date!: Date;
   public subtotal!: number;
   public tax!: number;
   public discounts!: number;
   public total!: number;
   public status!: "ACTIVE" | "INACTIVE";
   public client_id!: number;
-  public sale_id!: number;
 }
 
 Sale.init(
   {
-    saleDate: {
+    sale_date: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
@@ -36,7 +35,7 @@ Sale.init(
       },
     },
     subtotal: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         notEmpty: { msg: "Subtotal cannot be empty" },
@@ -44,7 +43,7 @@ Sale.init(
       },
     },
     tax: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         notEmpty: { msg: "Tax cannot be empty" },
@@ -52,7 +51,7 @@ Sale.init(
       },
     },
     discounts: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         notEmpty: { msg: "Discounts cannot be empty" },
@@ -60,7 +59,7 @@ Sale.init(
       },
     },
     total: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         notEmpty: { msg: "Total cannot be empty" },
@@ -79,3 +78,12 @@ Sale.init(
     timestamps: false,
   }
 );
+
+Sale.hasMany(ProductSale, {
+  foreignKey: "sale_id",
+  sourceKey: "id",
+});
+ProductSale.belongsTo(Sale, {
+  foreignKey: "sale_id",
+  targetKey: "id",
+});

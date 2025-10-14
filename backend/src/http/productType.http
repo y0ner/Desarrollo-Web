@@ -1,0 +1,40 @@
+### productType.http
+
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los tipos de producto
+GET {{baseUrl}}/product-types
+
+### Obtener tipo de producto por ID
+GET {{baseUrl}}/product-types/1
+
+### Crear un nuevo tipo de producto
+POST {{baseUrl}}/product-types
+Content-Type: application/json
+
+{
+  "name": "Electrónicos",
+  "description": "Productos electrónicos y tecnológicos",
+  "status": "ACTIVE"
+}
+
+### Actualizar un tipo de producto
+PATCH {{baseUrl}}/product-types/1
+Content-Type: application/json
+
+{
+  "name": "Electrónicos Actualizados",
+  "description": "Productos electrónicos y tecnológicos actualizados",
+  "status": "ACTIVE"
+}
+
+### Eliminar un tipo de producto físicamente
+DELETE {{baseUrl}}/product-types/1
+
+### Eliminar un tipo de producto lógicamente
+DELETE {{baseUrl}}/product-types/1/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================

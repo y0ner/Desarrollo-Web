@@ -1,0 +1,48 @@
+### product.http
+
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los productos
+GET {{baseUrl}}/products
+
+### Obtener producto por ID
+GET {{baseUrl}}/products/1
+
+### Crear un nuevo producto
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Laptop HP",
+  "brand": "HP",
+  "price": 1500000,
+  "min_stock": 5,
+  "quantity": 10,
+  "product_type_id": 1,
+  "status": "ACTIVE"
+}
+
+### Actualizar un producto
+PATCH {{baseUrl}}/products/1
+Content-Type: application/json
+
+{
+  "name": "Laptop HP Actualizada",
+  "brand": "HP",
+  "price": 1600000,
+  "min_stock": 3,
+  "quantity": 8,
+  "product_type_id": 1,
+  "status": "ACTIVE"
+}
+
+### Eliminar un producto físicamente
+DELETE {{baseUrl}}/products/1
+
+### Eliminar un producto lógicamente
+DELETE {{baseUrl}}/products/1/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
