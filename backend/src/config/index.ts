@@ -44,6 +44,7 @@ export class App {
     this.routePrv.refreshTokenRoutes.routes(this.app);
     this.routePrv.resourceRoutes.routes(this.app);
     this.routePrv.resourceRoleRoutes.routes(this.app);
+    this.routePrv.authRoutes.routes(this.app)
   }
 
   private async dbConnection(): Promise<void> {

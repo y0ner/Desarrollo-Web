@@ -1,17 +1,107 @@
 ### sale.http
 
-@baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+@baseUrl = http://localhost:4000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTc2MDA2MDU1NywiZXhwIjoxNzYwMDYxMTU3fQ.l9kxHGraKffDkcOLHMmaVa12iOQKdrhZHrNnP6wb6dA
 
 ### ================== RUTAS SIN AUTENTICACIÓN ==================
 
-### Obtener todas las ventas
+### Obtener todas las ventas (SIN token)
+GET {{baseUrl}}/api/sales/public
+
+### Obtener venta por ID (SIN token)
+GET {{baseUrl}}/api/sales/public/1
+
+### Crear una nueva venta (SIN token)
+POST {{baseUrl}}/api/sales/public
+Content-Type: application/json
+
+{
+  "sale_date": "2024-01-15T10:30:00.000Z",
+  "subtotal": 100000,
+  "tax": 19000,
+  "discounts": 5000,
+  "total": 114000,
+  "status": "ACTIVE",
+  "client_id": 1
+}
+
+### Actualizar una venta (SIN token)
+PATCH {{baseUrl}}/api/sales/public/1
+Content-Type: application/json
+
+{
+  "sale_date": "2024-01-15T10:30:00.000Z",
+  "subtotal": 120000,
+  "tax": 22800,
+  "discounts": 10000,
+  "total": 132800,
+  "status": "ACTIVE",
+  "client_id": 1
+}
+
+### Eliminar una venta físicamente (SIN token)
+DELETE {{baseUrl}}/api/sales/public/1
+
+### Eliminar una venta lógicamente (SIN token)
+DELETE {{baseUrl}}/api/sales/public/2/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las ventas (CON token)
+GET {{baseUrl}}/api/sales
+Authorization: Bearer {{token}}
+
+### Obtener venta por ID (CON token)
+GET {{baseUrl}}/api/sales/1
+Authorization: Bearer {{token}}
+
+### Crear una nueva venta (CON token)
+POST {{baseUrl}}/api/sales
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sale_date": "2024-02-20T14:45:00.000Z",
+  "subtotal": 250000,
+  "tax": 47500,
+  "discounts": 15000,
+  "total": 282500,
+  "status": "ACTIVE",
+  "client_id": 2
+}
+
+### Actualizar una venta (CON token)
+PATCH {{baseUrl}}/api/sales/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sale_date": "2024-02-20T15:00:00.000Z",
+  "subtotal": 275000,
+  "tax": 52250,
+  "discounts": 20000,
+  "total": 307250,
+  "status": "ACTIVE",
+  "client_id": 2
+}
+
+### Eliminar una venta físicamente (CON token)
+DELETE {{baseUrl}}/api/sales/1
+Authorization: Bearer {{token}}
+
+### Eliminar una venta lógicamente (CON token)
+DELETE {{baseUrl}}/api/sales/1/logic
+Authorization: Bearer {{token}}
+
+### ================== RUTAS LEGACY (mantener compatibilidad) ==================
+
+### Obtener todas las ventas (legacy)
 GET {{baseUrl}}/ventas
 
-### Obtener venta por ID
+### Obtener venta por ID (legacy)
 GET {{baseUrl}}/ventas/1
 
-### Crear una nueva venta
+### Crear una nueva venta (legacy)
 POST {{baseUrl}}/ventas
 Content-Type: application/json
 
@@ -25,7 +115,7 @@ Content-Type: application/json
   "client_id": 1
 }
 
-### Actualizar una venta
+### Actualizar una venta (legacy)
 PATCH {{baseUrl}}/ventas/1
 Content-Type: application/json
 
@@ -39,10 +129,8 @@ Content-Type: application/json
   "client_id": 1
 }
 
-### Eliminar una venta físicamente
+### Eliminar una venta físicamente (legacy)
 DELETE {{baseUrl}}/ventas/1
 
-### Eliminar una venta lógicamente
+### Eliminar una venta lógicamente (legacy)
 DELETE {{baseUrl}}/ventas/1/logic
-
-### ================== RUTAS CON AUTENTICACIÓN ==================

@@ -1,17 +1,91 @@
 ### productSale.http
 
-@baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+@baseUrl = http://localhost:4000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTc2MDA2MDU1NywiZXhwIjoxNzYwMDYxMTU3fQ.l9kxHGraKffDkcOLHMmaVa12iOQKdrhZHrNnP6wb6dA
 
 ### ================== RUTAS SIN AUTENTICACIÓN ==================
 
-### Obtener todas las ventas de productos
+### Obtener todas las ventas de productos (SIN token)
+GET {{baseUrl}}/api/product-sales/public
+
+### Obtener venta de producto por ID (SIN token)
+GET {{baseUrl}}/api/product-sales/public/1
+
+### Crear una nueva venta de producto (SIN token)
+POST {{baseUrl}}/api/product-sales/public
+Content-Type: application/json
+
+{
+  "total": 1500000,
+  "sale_id": 1,
+  "product_id": 1
+}
+
+### Actualizar una venta de producto (SIN token)
+PATCH {{baseUrl}}/api/product-sales/public/1
+Content-Type: application/json
+
+{
+  "total": 1600000,
+  "sale_id": 1,
+  "product_id": 1
+}
+
+### Eliminar una venta de producto físicamente (SIN token)
+DELETE {{baseUrl}}/api/product-sales/public/1
+
+### Eliminar una venta de producto lógicamente (SIN token)
+DELETE {{baseUrl}}/api/product-sales/public/2/logic
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las ventas de productos (CON token)
+GET {{baseUrl}}/api/product-sales
+Authorization: Bearer {{token}}
+
+### Obtener venta de producto por ID (CON token)
+GET {{baseUrl}}/api/product-sales/1
+Authorization: Bearer {{token}}
+
+### Crear una nueva venta de producto (CON token)
+POST {{baseUrl}}/api/product-sales
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "total": 2500000,
+  "sale_id": 2,
+  "product_id": 2
+}
+
+### Actualizar una venta de producto (CON token)
+PATCH {{baseUrl}}/api/product-sales/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "total": 2700000,
+  "sale_id": 2,
+  "product_id": 2
+}
+
+### Eliminar una venta de producto físicamente (CON token)
+DELETE {{baseUrl}}/api/product-sales/1
+Authorization: Bearer {{token}}
+
+### Eliminar una venta de producto lógicamente (CON token)
+DELETE {{baseUrl}}/api/product-sales/1/logic
+Authorization: Bearer {{token}}
+
+### ================== RUTAS LEGACY (mantener compatibilidad) ==================
+
+### Obtener todas las ventas de productos (legacy)
 GET {{baseUrl}}/product-sales
 
-### Obtener venta de producto por ID
+### Obtener venta de producto por ID (legacy)
 GET {{baseUrl}}/product-sales/1
 
-### Crear una nueva venta de producto
+### Crear una nueva venta de producto (legacy)
 POST {{baseUrl}}/product-sales
 Content-Type: application/json
 
@@ -21,7 +95,7 @@ Content-Type: application/json
   "product_id": 1
 }
 
-### Actualizar una venta de producto
+### Actualizar una venta de producto (legacy)
 PATCH {{baseUrl}}/product-sales/1
 Content-Type: application/json
 
@@ -31,10 +105,8 @@ Content-Type: application/json
   "product_id": 1
 }
 
-### Eliminar una venta de producto físicamente
+### Eliminar una venta de producto físicamente (legacy)
 DELETE {{baseUrl}}/product-sales/1
 
-### Eliminar una venta de producto lógicamente
+### Eliminar una venta de producto lógicamente (legacy)
 DELETE {{baseUrl}}/product-sales/1/logic
-
-### ================== RUTAS CON AUTENTICACIÓN ==================

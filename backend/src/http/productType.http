@@ -1,18 +1,18 @@
 ### productType.http
 
-@baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+@baseUrl = http://localhost:4000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTc2MDA2MDU1NywiZXhwIjoxNzYwMDYxMTU3fQ.l9kxHGraKffDkcOLHMmaVa12iOQKdrhZHrNnP6wb6dA
 
 ### ================== RUTAS SIN AUTENTICACIÓN ==================
 
-### Obtener todos los tipos de producto
-GET {{baseUrl}}/product-types
+### Obtener todos los tipos de producto (SIN token)
+GET {{baseUrl}}/api/product-types/public
 
-### Obtener tipo de producto por ID
-GET {{baseUrl}}/product-types/1
+### Obtener tipo de producto por ID (SIN token)
+GET {{baseUrl}}/api/product-types/public/1
 
-### Crear un nuevo tipo de producto
-POST {{baseUrl}}/product-types
+### Crear un nuevo tipo de producto (SIN token)
+POST {{baseUrl}}/api/product-types/public
 Content-Type: application/json
 
 {
@@ -21,8 +21,8 @@ Content-Type: application/json
   "status": "ACTIVE"
 }
 
-### Actualizar un tipo de producto
-PATCH {{baseUrl}}/product-types/1
+### Actualizar un tipo de producto (SIN token)
+PATCH {{baseUrl}}/api/product-types/public/1
 Content-Type: application/json
 
 {
@@ -31,10 +31,48 @@ Content-Type: application/json
   "status": "ACTIVE"
 }
 
-### Eliminar un tipo de producto físicamente
-DELETE {{baseUrl}}/product-types/1
+### Eliminar un tipo de producto físicamente (SIN token)
+DELETE {{baseUrl}}/api/product-types/public/1
 
-### Eliminar un tipo de producto lógicamente
-DELETE {{baseUrl}}/product-types/1/logic
+### Eliminar un tipo de producto lógicamente (SIN token)
+DELETE {{baseUrl}}/api/product-types/public/2/logic
 
 ### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los tipos de producto (CON token)
+GET {{baseUrl}}/api/product-types
+Authorization: Bearer {{token}}
+
+### Obtener tipo de producto por ID (CON token)
+GET {{baseUrl}}/api/product-types/1
+Authorization: Bearer {{token}}
+
+### Crear un nuevo tipo de producto (CON token)
+POST {{baseUrl}}/api/product-types
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Ropa y Accesorios",
+  "description": "Prendas de vestir y accesorios de moda",
+  "status": "ACTIVE"
+}
+
+### Actualizar un tipo de producto (CON token)
+PATCH {{baseUrl}}/api/product-types/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Ropa y Accesorios Premium",
+  "description": "Prendas de vestir y accesorios de moda premium",
+  "status": "ACTIVE"
+}
+
+### Eliminar un tipo de producto físicamente (CON token)
+DELETE {{baseUrl}}/api/product-types/1
+Authorization: Bearer {{token}}
+
+### Eliminar un tipo de producto lógicamente (CON token)
+DELETE {{baseUrl}}/api/product-types/1/logic
+Authorization: Bearer {{token}}

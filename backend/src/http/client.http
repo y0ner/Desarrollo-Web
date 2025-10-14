@@ -1,35 +1,32 @@
 // client.http
 import dotenv from "dotenv";
 
-
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNzU5OTQyNjMxLCJleHAiOjE3NTk5NDMyMzF9.EAhQ6CjPXiwsq-hbvUSn9EXKF4CXcD-Q9IYMYlcOh3k
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTc2MDA2MDU1NywiZXhwIjoxNzYwMDYxMTU3fQ.l9kxHGraKffDkcOLHMmaVa12iOQKdrhZHrNnP6wb6dA
 @baseUrl = http://localhost:4000
 
-### Peticiones sin TOKEN
+### ================== RUTAS SIN AUTENTICACIÓN ==================
 
-### Obtener todos los clientes 
-GET {{baseUrl}}/api/clientes
+### Obtener todos los clientes (SIN token)
+GET {{baseUrl}}/api/clientes/public
 
+### Obtener cliente por ID (SIN token)
+GET {{baseUrl}}/api/clientes/public/1
 
-### Obtener cliente por ID 
-GET {{baseUrl}}/api/clientes/1
-
-### Crear un nuevo cliente 
-POST {{baseUrl}}/api/clientes
+### Crear un nuevo cliente (SIN token)
+POST {{baseUrl}}/api/clientes/public
 Content-Type: application/json
 
 {
-  "name": "Jaider Quintero",
+  "name": "Sandy Romero",
   "address": "Km 1",
   "phone": "3001234567",
-  "email": "jqm@gmail.com",
+  "email": "srm@gmail.com",
   "password": "12345678",
   "status": "ACTIVE"
 }
 
-
-### Actualizar un cliente 
-PATCH {{baseUrl}}/api/clientes/1
+### Actualizar un cliente (SIN token)
+PATCH {{baseUrl}}/api/clientes/public/1
 Content-Type: application/json
 
 {
@@ -41,15 +38,54 @@ Content-Type: application/json
   "status": "ACTIVE"
 }
 
+### Eliminar un cliente físicamente (SIN token)
+DELETE {{baseUrl}}/api/clientes/public/1
 
-
-### Eliminar un cliente físicamente 
-DELETE {{baseUrl}}/api/clientes/1
-
-
-
-### Eliminar un cliente lógicamente
-DELETE {{baseUrl}}/api/clientes/1/logic
-
+### Eliminar un cliente lógicamente (SIN token)
+DELETE {{baseUrl}}/api/clientes/public/2/logic
 
 ### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los clientes (CON token)
+GET {{baseUrl}}/api/clientes
+Authorization: Bearer {{token}}
+
+### Obtener cliente por ID (CON token)
+GET {{baseUrl}}/api/clientes/1
+Authorization: Bearer {{token}}
+
+### Crear un nuevo cliente (CON token)
+POST {{baseUrl}}/api/clientes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "María García",
+  "address": "Calle 123",
+  "phone": "3009876543",
+  "email": "maria.garcia@example.com",
+  "password": "87654321",
+  "status": "ACTIVE"
+}
+
+### Actualizar un cliente (CON token)
+PATCH {{baseUrl}}/api/clientes/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "María García Actualizada",
+  "address": "Avenida 456",
+  "phone": "3001234567",
+  "email": "maria.garcia.updated@example.com",
+  "password": "newpassword123",
+  "status": "ACTIVE"
+}
+
+### Eliminar un cliente físicamente (CON token)
+DELETE {{baseUrl}}/api/clientes/1
+Authorization: Bearer {{token}}
+
+### Eliminar un cliente lógicamente (CON token)
+DELETE {{baseUrl}}/api/clientes/1/logic
+Authorization: Bearer {{token}}
